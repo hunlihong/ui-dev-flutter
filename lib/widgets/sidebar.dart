@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mad_1/posts/post-screen.dart';
 
 class Sidebar extends StatelessWidget {
   const Sidebar({super.key, required this.activeIndex});
@@ -7,8 +8,6 @@ class Sidebar extends StatelessWidget {
 
   void _onTap(BuildContext context, String routeName) {
     Navigator.pushNamed(context, routeName);
-    Navigator.pop(context);
-    print(routeName);
   }
 
   @override
