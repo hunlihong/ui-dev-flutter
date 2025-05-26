@@ -98,11 +98,18 @@ class PostAttachment extends StatelessWidget {
                 // Expanded(
                 //   child: ActionButton(title: 'Like', icon: Icon(Icons.thumb_up_outlined), activeIcon: Icon(Icons.thumb_up))
                 // ),
-                ActionButton(title: 'Like', icon: Icon(Icons.thumb_up_outlined), activeIcon: Icon(Icons.thumb_up)),
-                Expanded(
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: ActionButton(title: 'Like', icon: Icon(Icons.thumb_up_outlined), activeIcon: Icon(Icons.thumb_up))
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 3,
                   child: ActionButton(title: 'Comment', icon: Icon(Icons.comment), activeIcon: Icon(Icons.comment))
                 ),
-                ActionButton(title: 'Share', icon: Icon(Icons.share), activeIcon: Icon(Icons.share))
+                SizedBox(
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: ActionButton(title: 'Share', icon: Icon(Icons.share), activeIcon: Icon(Icons.share))
+                )
               ]
             )
           )

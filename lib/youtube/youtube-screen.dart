@@ -15,18 +15,17 @@ class YouTubeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        scrolledUnderElevation: 0,
         title: const Text(
           "YouTube",
           style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+            color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
         ),
         actions: [
           IconButton(
-              icon: const Icon(Icons.search, color: Colors.white),
-              onPressed: () {}),
+            icon: const Icon(Icons.search, color: Colors.black),
+            onPressed: () {}),
         ],
       ),
       drawer: Sidebar(activeIndex: 0),
@@ -45,15 +44,14 @@ class YouTubeScreen extends StatelessWidget {
                   child: Chip(
                     label: Text(
                       categories[index],
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.black),
                     ),
-                    backgroundColor: Colors.grey[800],
+                    backgroundColor: Colors.white60
                   ),
                 );
               },
             ),
           ),
-          SizedBox(height: 20.0),
           Expanded(
             child: ListView.builder(
               itemCount: videos.length,
@@ -80,14 +78,14 @@ class YouTubeScreen extends StatelessWidget {
                     ),
                     ListTile(
                       leading: const CircleAvatar(
-                        backgroundColor: Colors.white,
+                        backgroundColor: Colors.black,
                         child: Icon(Icons.verified_user, size: 18.0,),
                       ),
                       title: Text(video["title"]!,
-                          style: const TextStyle(color: Colors.white)),
+                          style: const TextStyle(color: Colors.black)),
                       subtitle: Text(
                         "${video["channel"]} • ${video["views"]} • ${video["time"]}",
-                        style: TextStyle(color: Colors.grey[400], fontSize: 12),
+                        style: TextStyle(color: Colors.black45, fontSize: 12),
                       ),
                       trailing:
                       const Icon(Icons.more_vert, color: Colors.white),

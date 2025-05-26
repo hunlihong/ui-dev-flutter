@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mad_1/posts/post-screen.dart';
 
 class Sidebar extends StatelessWidget {
   const Sidebar({super.key, required this.activeIndex});
@@ -33,6 +32,16 @@ class Sidebar extends StatelessWidget {
             title: const Text('Posts'),
               selected: activeIndex == 1,
               onTap: () => _onTap(context, '/posts')
+          ),
+          ListTile(
+            title: const Text('Users'),
+            selected: activeIndex == 2,
+            onTap: () => _onTap(context, '/users')
+          ),
+          ListTile(
+            title: const Text('Form Validation'),
+            selected: activeIndex == 3,
+            onTap: () => _onTap(context, '/form-validation')
           )
         ]
       )
