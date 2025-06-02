@@ -10,7 +10,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _FormState extends State<RegisterScreen> {
-  bool _isShow = true;
+  bool _isShow = true, _isValidatedKey = false;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
@@ -24,6 +24,10 @@ class _FormState extends State<RegisterScreen> {
     });
   }
 
+  void _setIsValidatedKey(bool value) => setState(() {
+    _isValidatedKey = value;
+  });
+
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(
@@ -35,7 +39,7 @@ class _FormState extends State<RegisterScreen> {
           child: Form(
             key: _formKey,
             child: Column(
-              spacing: 20,
+              spacing: 10,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -44,7 +48,7 @@ class _FormState extends State<RegisterScreen> {
                 FormControl(labelText: 'Full name', controller: _fullNameController, prefixIcon: Icon(Icons.perm_identity)),
                 FormControl(labelText: 'Username', controller: _usernameController, prefixIcon: Icon(Icons.person)),
                 FormControl(labelText: 'Phone number', controller: _phoneNumberController, prefixIcon: Icon(Icons.phone)),
-                FormControl(labelText: 'Email', controller: _emailController, prefixIcon: Icon(Icons.email)),
+                FormControl(labelText: 'Email', controller: _emailController, prefixIcon: Icon(Icons.email), isValidatedKey: _isValidatedKey, setIsValidatedKey: _setIsValidatedKey),
                 FormControl(labelText:  'Password', controller: _passwordController, obscureText: _isShow, prefixIcon: Icon(Icons.lock), suffixIcon: IconButton(onPressed: _toggleIsShow, icon: _isShow ? Icon(Icons.visibility) : Icon(Icons.visibility_off))),
                 SizedBox(height: 10),
                 SizedBox(
@@ -58,7 +62,7 @@ class _FormState extends State<RegisterScreen> {
                       )
                     ),
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
+                      if (_formKey.currentState!.validate() && _isValidatedKey) {
                         Navigator.pushNamed(context, '/phone-verify');
                       }
                     },

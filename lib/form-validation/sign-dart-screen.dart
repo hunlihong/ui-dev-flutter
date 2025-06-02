@@ -10,7 +10,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _FormState extends State<SignInScreen> {
-  bool _isShow = true;
+  bool _isShow = true, _isValidatedKey = false;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -20,6 +20,10 @@ class _FormState extends State<SignInScreen> {
       _isShow = !_isShow;
     });
   }
+
+  void _setIsValidatedKey(bool value) => setState(() {
+    _isValidatedKey = value;
+  });
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,14 +36,14 @@ class _FormState extends State<SignInScreen> {
           child: Form(
             key: _formKey,
               child: Column(
-                spacing: 20,
+                spacing: 10,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   const Text('Sign In', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black), textAlign: TextAlign.center),
                   SizedBox(height: 10),
-                  FormControl(labelText: 'Username', controller: _usernameController, prefixIcon: Icon(Icons.person)),
-                  FormControl(labelText:  'Password', controller: _passwordController, obscureText: _isShow, prefixIcon: Icon(Icons.lock), suffixIcon: IconButton(onPressed: _toggleIsShow, icon: _isShow ? Icon(Icons.visibility) : Icon(Icons.visibility_off))),
+                  FormControl(labelText: 'Email', controller: _usernameController, prefixIcon: Icon(Icons.email), formKey: _formKey, isValidatedKey: _isValidatedKey, setIsValidatedKey: _setIsValidatedKey),
+                  FormControl(labelText:  'Password', controller: _passwordController, obscureText: _isShow, prefixIcon: Icon(Icons.lock), suffixIcon: IconButton(onPressed: _toggleIsShow, icon: _isShow ? Icon(Icons.visibility) : Icon(Icons.visibility_off)), formKey: _formKey),
                   SizedBox(height: 10),
                   SizedBox(
                     width: double.infinity,
@@ -48,11 +52,11 @@ class _FormState extends State<SignInScreen> {
                       style: OutlinedButton.styleFrom(
                         backgroundColor: Colors.black,
                         side: BorderSide(
-                            color: Colors.black
+                          color: Colors.black
                         )
                       ),
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
+                        if (_formKey.currentState!.validate() && _isValidatedKey) {
                           Navigator.pushNamed(context, '/phone-verify');
                         }
                       },
@@ -75,9 +79,9 @@ class _FormState extends State<SignInScreen> {
                       child: const Text('Register', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold))
                     )
                   ]
-                  )
-                ]
-              )
+                )
+              ]
+            )
           )
         )
       )

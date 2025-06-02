@@ -36,7 +36,7 @@ class _FormState extends State<OtpVerifyScreen> {
           child: Column(
             spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text('Verify OTP Code', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black), textAlign: TextAlign.center),
               SizedBox(height: 10),
@@ -44,9 +44,10 @@ class _FormState extends State<OtpVerifyScreen> {
                 borderWidth: 1,
                 numberOfFields: 6,
                 borderColor: Colors.black45,
+                contentPadding: EdgeInsets.all(2),
                 showFieldAsBox: true,
-                fieldHeight: 50,
-                fieldWidth: 50,
+                fieldHeight: 35,
+                fieldWidth: 35,
                 onSubmit: _setInputCode
               ),
               SizedBox(height: 10),
