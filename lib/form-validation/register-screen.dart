@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mad_1/form-validation/components/auth-card.dart';
 import 'package:mad_1/form-validation/components/form-control.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -27,6 +28,18 @@ class _FormState extends State<RegisterScreen> {
   void _setIsValidatedKey(bool value) => setState(() {
     _isValidatedKey = value;
   });
+
+  Future<void> _handleRegister(BuildContext context) async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+
+    final String fullName = _fullNameController.text;
+    final String username = _usernameController.text;
+
+    await pref.setString('fullName', fullName);
+    await pref.setString('username', username);
+
+    Navigator.pushNamed(context, '/home');
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +76,7 @@ class _FormState extends State<RegisterScreen> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate() && _isValidatedKey) {
-                        Navigator.pushNamed(context, '/phone-verify');
+                        _handleRegister(context);
                       }
                     },
                     child: const Text('Register', style: TextStyle(color: Colors.white, fontSize: 16))

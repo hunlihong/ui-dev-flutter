@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mad_1/form-validation/components/auth-card.dart';
 import 'package:mad_1/form-validation/components/form-control.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -24,6 +25,13 @@ class _FormState extends State<SignInScreen> {
   void _setIsValidatedKey(bool value) => setState(() {
     _isValidatedKey = value;
   });
+
+  Future<void> _handleSignIn(BuildContext context) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setBool('isSignedIn', true);
+    Navigator.pushNamed(context, '/home');
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +65,7 @@ class _FormState extends State<SignInScreen> {
                       ),
                       onPressed: () {
                         if (_formKey.currentState!.validate() && _isValidatedKey) {
-                          Navigator.pushNamed(context, '/phone-verify');
+                          _handleSignIn(context);
                         }
                       },
                       child: const Text('Sign In', style: TextStyle(color: Colors.white, fontSize: 16))
